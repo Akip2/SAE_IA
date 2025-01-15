@@ -1,6 +1,4 @@
-package src;
-
-public class Sigmoid  implements TransferFunction {
+public class Sigmoid implements TransferFunction {
 
     @Override
     public double evaluate(double value) {
@@ -9,6 +7,6 @@ public class Sigmoid  implements TransferFunction {
 
     @Override
     public double evaluateDer(double value) {
-        return evaluate(-value) - Math.pow(evaluate(value), 2);
+        return evaluate(value) - Math.pow(evaluate(value), 2);
     }
 }

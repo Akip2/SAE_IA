@@ -1,7 +1,5 @@
-package src;
-
-public class Hyperbolic implements TransferFunction{
-    public Hyperbolic(){
+public class Hyperbolic implements TransferFunction {
+    public Hyperbolic() {
 
     }
 

@@ -1,5 +1,3 @@
-package src;
-
 public class Main {
     public static void main(String[] args) {
         int[] couches = {2, 1, 1};  //  nb entrées, nb neurones cachés, nb sortie
