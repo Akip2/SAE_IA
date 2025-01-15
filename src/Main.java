@@ -1,7 +1,9 @@
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        int[] couches = {2, 2, 1};  //  nb entrées, nb neurones cachés, nb sortie
-        double tauxApprentissage = 0.1;
+        int[] couches = {2, 3, 1};  //  nb entrées, nb neurones cachés, nb sortie
+        double tauxApprentissage = 0.7;
         TransferFunction fonctionActivation = new Sigmoid();
 
         MLP reseau = new MLP(couches, tauxApprentissage, fonctionActivation);
@@ -18,8 +20,24 @@ public class Main {
                 {1},
                 {0}
         };
+
+        Random rd = new Random();
+
+        for (int i = entreesApprentissage.length - 1; i > 0; i--) {
+            int j = rd.nextInt(i + 1);
+
+            // Permutation des entrées
+            double[] tempEntree = entreesApprentissage[i];
+            entreesApprentissage[i] = entreesApprentissage[j];
+            entreesApprentissage[j] = tempEntree;
+
+            // Permutation synchronisée des sorties
+            double[] tempSortie = sortiesAttendues[i];
+            sortiesAttendues[i] = sortiesAttendues[j];
+            sortiesAttendues[j] = tempSortie;
+        }
         double erreur_cible = 0.01;
-        int max_iterations = 10000;
+        int max_iterations = 1000000;
         double erreur_courante = 1;
         int iteration = 0;
         while ((erreur_courante > erreur_cible) && iteration < max_iterations) {
@@ -32,7 +50,7 @@ public class Main {
             iteration++;
         }
         System.out.println("Tests");
-        for(int i = 0; i < entreesApprentissage.length; i++) {
+        for (int i = 0; i < entreesApprentissage.length; i++) {
             double[] sortieCalculee = reseau.execute(entreesApprentissage[i]);
             // Afficher les résultats
             System.out.println("Entrée: " + entreesApprentissage[i][0] + ","
