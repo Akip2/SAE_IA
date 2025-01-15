@@ -1,22 +1,22 @@
 public class Main {
     public static void main(String[] args) {
-        int[] couches = {2, 1, 1};  //  nb entrées, nb neurones cachés, nb sortie
+        int[] couches = {2, 2, 1};  //  nb entrées, nb neurones cachés, nb sortie
         double tauxApprentissage = 0.1;
         TransferFunction fonctionActivation = new Sigmoid();
 
         MLP reseau = new MLP(couches, tauxApprentissage, fonctionActivation);
 
         double[][] entreesApprentissage = {
-                {0, 1},
                 {0, 0},
-                {1, 1},
-                {1, 0}
+                {0, 1},
+                {1, 0},
+                {1, 1}
         };
         double[][] sortiesAttendues = {
-                {1},
                 {0},
                 {1},
-                {1}
+                {1},
+                {0}
         };
         double erreur_cible = 0.01;
         int max_iterations = 10000;
