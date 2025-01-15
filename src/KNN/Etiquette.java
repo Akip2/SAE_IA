@@ -1,4 +1,4 @@
-package MNIST;
+package KNN;
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;

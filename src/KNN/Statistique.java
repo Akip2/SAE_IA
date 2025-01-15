@@ -1,4 +1,4 @@
-package MNIST;
+package KNN;
 
 public class Statistique {
 

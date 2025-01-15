@@ -1,4 +1,7 @@
+package KNN;
+
 import java.io.IOException;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -14,7 +17,6 @@ public class Main {
             System.out.println("Étiquette de la dernière image : " + labels[labels.length - 1]);
             Donnees donneesTest = MNISTLoader.loadData("images/t10k-images.idx3-ubyte", "images/t10k-labels.idx1-ubyte");
             System.out.println("Deuxième chargement de données");
-           // PlusProche algo = new PlusProche(donneesTrain);
             kNN algo = new kNN(donneesTrain,2);
             System.out.println("Calcul de la précision");
             double Res = Statistique.calculerPrecision(algo, donneesTest);

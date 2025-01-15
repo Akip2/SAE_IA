@@ -1,4 +1,4 @@
-package MNIST;
+package KNN;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

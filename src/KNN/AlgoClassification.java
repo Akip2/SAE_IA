@@ -1,4 +1,4 @@
-package MNIST;
+package KNN;
 
 public abstract class AlgoClassification {
     Donnees donneesEntrainement;

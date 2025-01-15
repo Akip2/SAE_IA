@@ -1,6 +1,9 @@
+package KNN;
+
 import java.util.*;
 
-public class kNN extends AlgoClassification{
+
+public class kNN extends AlgoClassification {
 
     private int k;
 
@@ -13,6 +16,7 @@ public class kNN extends AlgoClassification{
     public int predireEtiquette(Imagette imagette) {List<ImagetteDistance> distances = new ArrayList<>();
 
         // Parcourir toutes les imagettes d'entraînement
+
         for (int i = 0; i < donneesEntrainement.getNombreImagettes(); i++) {
             Imagette imagetteEntrainement = donneesEntrainement.getImagette(i);
 
