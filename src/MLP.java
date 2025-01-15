@@ -1,5 +1,3 @@
-package src;
-
 public class MLP  {
     protected double	        fLearningRate = 0.6;
     protected Layer[]		fLayers;

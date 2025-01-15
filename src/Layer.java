@@ -1,5 +1,3 @@
-package src;
-
 class Layer {
     public Neuron Neurons[];
     public int 	  Length;
