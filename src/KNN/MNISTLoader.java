@@ -34,15 +34,15 @@ public class MNISTLoader {
 
             for (int k = 0; k < nbImages; k++) {
                 images[k] = new Imagette(nbLignes, nbColonnes);
-                int[][] pixels = images[k].pixels;
+                double[][] pixels = images[k].pixels;
 
                 for (int i = 0; i < nbLignes; i++) {
                     for (int j = 0; j < nbColonnes; j++) {
                         pixels[i][j] = dataInputStream.readUnsignedByte();
+                        pixels[i][j] /= 255;
                     }
                 }
             }
-
             return images;
         }
     }
@@ -57,7 +57,7 @@ public class MNISTLoader {
             pixelMap[i] = (i << 16) | (i << 8) | i;
         }
 
-        int[][] pixels = image.pixels;
+        double[][] pixels = image.pixels;
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
                 bufferedImage.setRGB(j, i, pixelMap[(int) pixels[i][j]]);

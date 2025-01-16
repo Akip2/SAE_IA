@@ -31,11 +31,11 @@ public class MLPMNIST {
      * @param input l'entrée testée
      * @return résultat de l'exécution
      */
-    public int execute(int[] input) {
+    public double execute(double[] input) {
         int i, j, k;
         double new_value;
 
-        int output;
+        double output;
 
         // input en entrée du réseau
         for (i = 0; i < fLayers[0].Length; i++) {
@@ -56,7 +56,7 @@ public class MLPMNIST {
 
         // Renvoyer sortie
         //System.out.println(fLayers[fLayers.length - 1].Neurons[0].Value);
-        output = (int) (fLayers[fLayers.length - 1].Neurons[0].Value * 10);
+        output = fLayers[fLayers.length - 1].Neurons[0].Value;
 
         return output;
     }
@@ -69,12 +69,13 @@ public class MLPMNIST {
      * @return Error différence entre la sortie calculée et la sortie souhaitée
      */
 
-    public double backPropagate(int[] input, int output) {
-        int new_output = execute(input);
+    public double backPropagate(double[] input, double output) {
+        double new_output = execute(input);
         double error;
         int i, j, k;
 
         // Erreur de sortie
+        //System.out.println(output + " " +new_output);
         error = output - new_output;
         fLayers[fLayers.length - 1].Neurons[0].Delta = error * fTransferFunction.evaluateDer(new_output);
 
