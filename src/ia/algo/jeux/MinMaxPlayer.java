@@ -28,10 +28,10 @@ public class MinMaxPlayer extends Player {
         ActionValuePair pair;
 
         if(player == PLAYER1){
-            pair = maxValeur(state);
+            pair = minValeur(state);
         }
         else {
-            pair = minValeur(state);
+            pair = maxValeur(state);
         }
 
         move = pair.getAction();
