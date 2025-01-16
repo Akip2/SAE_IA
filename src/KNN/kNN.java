@@ -24,7 +24,7 @@ public class kNN extends AlgoClassification {
             double distance = calculerDistance(imagette, imagetteEntrainement);
 
             // Ajouter la distance et l'étiquette dans la liste
-            distances.add(new ImagetteDistance(imagetteEntrainement.getLabel(), distance));
+            distances.add(new ImagetteDistance((int) imagetteEntrainement.getLabel(), distance));
         }
 
         // Trier la liste des distances par ordre croissant
@@ -45,7 +45,7 @@ public class kNN extends AlgoClassification {
 
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
-                int diff = img1.getPixel(i, j) - img2.getPixel(i, j);
+                double diff = img1.getPixel(i, j) - img2.getPixel(i, j);
                 somme += diff * diff;
             }
         }

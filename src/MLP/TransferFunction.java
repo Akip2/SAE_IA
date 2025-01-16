@@ -1,6 +1,6 @@
 package MLP;
 
-interface TransferFunction {
+public interface TransferFunction {
     /**
      * Function de transfert
      *
