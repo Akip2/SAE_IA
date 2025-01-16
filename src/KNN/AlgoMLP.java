@@ -20,8 +20,13 @@ public class AlgoMLP extends AlgoClassification {
     public void train(double erreur_cible, int max_iterations) {
         double erreur_courante = 1;
         int iteration = 0;
+        int count_percent = 1;
         while ((erreur_courante > erreur_cible) && iteration < max_iterations) {
-            System.out.println("Apprentissage en cours : "+iteration +"%");
+            
+            if (iteration % (max_iterations/100) == 0) {
+                System.out.println("Apprentissage en cours : " + count_percent +"%");
+                count_percent++;
+            }
 
             erreur_courante = 0;
             for (int i = 0; i < donneesEntrainement.getNombreImagettes(); i++) {
