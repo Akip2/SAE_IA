@@ -21,8 +21,8 @@ public class AlgoMLP extends AlgoClassification {
         double erreur_courante = 1;
         int iteration = 0;
         while ((erreur_courante > erreur_cible) && iteration < max_iterations) {
-            if (iteration % max_iterations/100 == 0) {
-                System.out.println("Apprentissage en cours : "+iteration/(max_iterations/100) +"%");
+            if (iteration % (max_iterations/100) == 0) {
+                System.out.println("Apprentissage en cours : "+iteration/max_iterations +"%");
             }
 
             erreur_courante = 0;
