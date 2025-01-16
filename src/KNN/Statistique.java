@@ -11,12 +11,11 @@ public class Statistique {
         for (int i = 0; i < nbTotal; i++) {
 
             Imagette imagetteTest = donneesTest.getImagette(i);
-
             // Prédire l'étiquette de l'imagette
             int etiquettePredite = algo.predireEtiquette(imagetteTest);
             System.out.println("Etiquette predite : " + etiquettePredite + " Etiquette Reelle : " + imagetteTest.getLabel());
-            // Vérifier si la prédiction est correcte
 
+            // Vérifier si la prédiction est correcte
             if (etiquettePredite == imagetteTest.getLabel()) {
                 nbCorrects++;
             }

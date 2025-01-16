@@ -27,13 +27,14 @@ public class MNISTLoader {
         try (DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filePath))) {
             int id = dataInputStream.readInt();
             int nbImages = dataInputStream.readInt();
+            nbImages = 100;
             int nbLignes = dataInputStream.readInt();
             int nbColonnes = dataInputStream.readInt();
             Imagette[] images = new Imagette[nbImages];
 
             for (int k = 0; k < nbImages; k++) {
                 images[k] = new Imagette(nbLignes, nbColonnes);
-                double[][] pixels = images[k].pixels;
+                int[][] pixels = images[k].pixels;
 
                 for (int i = 0; i < nbLignes; i++) {
                     for (int j = 0; j < nbColonnes; j++) {
@@ -56,7 +57,7 @@ public class MNISTLoader {
             pixelMap[i] = (i << 16) | (i << 8) | i;
         }
 
-        double[][] pixels = image.pixels;
+        int[][] pixels = image.pixels;
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
                 bufferedImage.setRGB(j, i, pixelMap[(int) pixels[i][j]]);

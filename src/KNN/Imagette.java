@@ -3,18 +3,18 @@ package KNN;
 import java.util.stream.Stream;
 
 public class Imagette {
-        double[][] pixels;
+        int[][] pixels;
         int etiquette;
 
         public Imagette(int rows, int cols) {
-            pixels = new double[rows][cols];
+            pixels = new int[rows][cols];
         }
 
-        public void setPixel(int row, int col, double value) {
+        public void setPixel(int row, int col, int value) {
             pixels[row][col] = value;
         }
 
-        public double getPixel(int row, int col) {
+        public int getPixel(int row, int col) {
             return pixels[row][col];
         }
 
@@ -22,7 +22,7 @@ public class Imagette {
             this.etiquette = etiquette;
         }
 
-        public double getLabel() {
+        public int getLabel() {
             return etiquette;
         }
 
@@ -30,13 +30,13 @@ public class Imagette {
             return this.pixels[0].length*this.pixels.length;
         }
 
-        public double[] getFlatPixels() {
+        public int[] getFlatPixels() {
             int lineSize = this.pixels[0].length;
 
-            double[] flatPixels = new double[this.pixels.length * lineSize];
+            int[] flatPixels = new int[this.pixels.length * lineSize];
 
             for(int x=0; x<this.pixels.length; x++){
-                double[] line = this.pixels[x];
+                int[] line = this.pixels[x];
                 for(int y=0; y<line.length; y++){
                     flatPixels[x*lineSize+y]=line[y];
                 }
