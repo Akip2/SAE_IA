@@ -3,6 +3,7 @@ out
 !srcmainout
 !srctestout
 .iml
+SAE_IA.iml
 .idea
 .mvn
 mvnw.cmd
