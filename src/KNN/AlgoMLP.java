@@ -5,7 +5,7 @@ import MLP.TransferFunction;
 
 public class AlgoMLP extends AlgoClassification {
 
-    private MLP.MLPMNIST mlp;
+    public MLP.MLPMNIST mlp;
 
     public AlgoMLP(Donnees donneesEntrainement, int[] layers, double tauxApprentissage, TransferFunction fonctionActivation) {
         super(donneesEntrainement);
@@ -28,8 +28,8 @@ public class AlgoMLP extends AlgoClassification {
 //            }
 
             erreur_courante = 0;
-            for (int i = 0; i < donneesEntrainement.getNombreImagettes(); i++) {
-                double erreur = mlp.backPropagate(donneesEntrainement.getImagette(i).getFlatPixels(), (double) donneesEntrainement.getImagette(i).getLabel() /10);
+            for (int indice = 0; indice < donneesEntrainement.getNombreImagettes(); indice++) {
+                double erreur = mlp.backPropagate(donneesEntrainement.getImagette(indice).getFlatPixels(), (double) donneesEntrainement.getImagette(indice).getLabel() /10);
                 erreur_courante += erreur;
             }
             erreur_courante /= donneesEntrainement.getNombreImagettes();

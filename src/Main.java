@@ -8,8 +8,6 @@ public class Main {
         try {
             System.out.println("Chargement des données d'entraînements...");
             Donnees donneesTrain = MNISTLoader.loadData("images/train-images.idx3-ubyte", "images/train-labels.idx1-ubyte");
-            //Nombre de couches de la première couche = taille des images
-            int nbPixelsImagette = donneesTrain.getImagette(0).getFlatPixels().length; //784 ; 28x28
 
             int[] layers = {200, 50, 10, 1};
             double tauxApprentissage = 0.01;
