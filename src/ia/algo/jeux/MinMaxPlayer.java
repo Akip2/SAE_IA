@@ -42,21 +42,19 @@ public class MinMaxPlayer extends Player {
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
-        else {
-            ActionValuePair maxPair = new ActionValuePair(null, Double.NEGATIVE_INFINITY);
-            ArrayList<Action> actions = game.getActions(state);
+        ActionValuePair maxPair = new ActionValuePair(null, Double.MIN_VALUE);
+        ArrayList<Action> actions = game.getActions(state);
 
-            for(Action action : actions){
-                GameState nextState = (GameState) game.doAction(state, action);
-                ActionValuePair pair = minValeur(nextState);
+        for(Action action : actions){
+            GameState nextState = (GameState) game.doAction(state, action);
+            ActionValuePair pair = minValeur(nextState);
 
-                if(pair.getValue() >= maxPair.getValue()){
-                    maxPair = new ActionValuePair(action, pair.getValue());
-                }
+            if(pair.getValue() >= maxPair.getValue()){
+                maxPair = new ActionValuePair(action, pair.getValue());
             }
-
-            return maxPair;
         }
+
+        return maxPair;
     }
 
     public ActionValuePair minValeur(GameState state) {
@@ -64,20 +62,18 @@ public class MinMaxPlayer extends Player {
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
-        else {
-            ActionValuePair minPair = new ActionValuePair(null, Double.POSITIVE_INFINITY);
-            ArrayList<Action> actions = game.getActions(state);
+        ActionValuePair minPair = new ActionValuePair(null, Double.MAX_VALUE);
+        ArrayList<Action> actions = game.getActions(state);
 
-            for(Action action : actions){
-                GameState nextState = (GameState) game.doAction(state, action);
-                ActionValuePair pair = maxValeur(nextState);
+        for(Action action : actions){
+            GameState nextState = (GameState) game.doAction(state, action);
+            ActionValuePair pair = maxValeur(nextState);
 
-                if(pair.getValue() <= minPair.getValue()){
-                    minPair = new ActionValuePair(action, pair.getValue());
-                }
+            if(pair.getValue() <= minPair.getValue()){
+                minPair = new ActionValuePair(action, pair.getValue());
             }
-
-            return minPair;
         }
+
+        return minPair;
     }
 }

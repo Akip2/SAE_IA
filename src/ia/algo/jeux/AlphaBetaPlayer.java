@@ -25,10 +25,10 @@ public class AlphaBetaPlayer extends Player {
         ActionValuePair pair;
 
         if(player == PLAYER1){
-            pair = maxValeur(state, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+            pair = maxValeur(state, Double.MIN_VALUE, Double.MAX_VALUE);
         }
         else {
-            pair = minValeur(state, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+            pair = minValeur(state, Double.MIN_VALUE, Double.MAX_VALUE);
         }
 
         move = pair.getAction();
@@ -41,33 +41,32 @@ public class AlphaBetaPlayer extends Player {
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
-        else {
-            ActionValuePair maxPair = new ActionValuePair(null, Double.NEGATIVE_INFINITY);
-            ArrayList<Action> actions = game.getActions(state);
+        ActionValuePair maxPair = new ActionValuePair(null, Double.MIN_VALUE);
+        ArrayList<Action> actions = game.getActions(state);
 
-            double maxValue = Double.NEGATIVE_INFINITY;
-            for(Action action : actions){
-                GameState nextState = (GameState) game.doAction(state, action);
-                ActionValuePair pair = minValeur(nextState, alpha, beta);
+        double maxValue = Double.MIN_VALUE;
+        for(Action action : actions){
+            GameState nextState = (GameState) game.doAction(state, action);
+            ActionValuePair pair = minValeur(nextState, alpha, beta);
 
-                double currentValue = pair.getValue();
+            double currentValue = pair.getValue();
 
-                if(currentValue >= maxValue){
-                    maxValue = currentValue;
-                    maxPair = new ActionValuePair(action, maxValue);
+            if(currentValue >= maxValue) {
+                maxValue = currentValue;
+                maxPair = new ActionValuePair(action, maxValue);
 
-                    if(maxValue > alpha){
-                        alpha = maxValue;
-                    }
-                }
-
-                if(maxValue >= beta){
-                    return maxPair;
+                if(maxValue > alpha) {
+                    alpha = maxValue;
                 }
             }
 
-            return maxPair;
+            if(maxValue >= beta) {
+                return maxPair;
+            }
         }
+
+        return maxPair;
+
     }
 
     public ActionValuePair minValeur(GameState state, double alpha, double beta) {
@@ -75,31 +74,30 @@ public class AlphaBetaPlayer extends Player {
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
-        else {
-            ActionValuePair minPair = new ActionValuePair(null, Double.POSITIVE_INFINITY);
-            ArrayList<Action> actions = game.getActions(state);
+        ActionValuePair minPair = new ActionValuePair(null, Double.MAX_VALUE);
+        ArrayList<Action> actions = game.getActions(state);
 
-            double minValue = Double.POSITIVE_INFINITY;
-            for(Action action : actions){
-                GameState nextState = (GameState) game.doAction(state, action);
-                ActionValuePair pair = maxValeur(nextState, alpha, beta);
+        double minValue = Double.MAX_VALUE;
+        for(Action action : actions){
+            GameState nextState = (GameState) game.doAction(state, action);
+            ActionValuePair pair = maxValeur(nextState, alpha, beta);
 
-                double currentValue = pair.getValue();
+            double currentValue = pair.getValue();
 
-                if(currentValue <= minValue){
-                    minValue = currentValue;
-                    minPair = new ActionValuePair(action, minValue);
+            if(currentValue <= minValue){
+                minValue = currentValue;
+                minPair = new ActionValuePair(action, minValue);
 
-                    if(minValue < beta){
-                        beta = minValue;
-                    }
-                }
-
-                if(minValue <= alpha){
-                    return minPair;
+                if(minValue < beta){
+                    beta = minValue;
                 }
             }
-            return minPair;
+
+            if(minValue <= alpha){
+                return minPair;
+            }
         }
+        return minPair;
     }
+
 }
