@@ -27,7 +27,7 @@ public class MNISTLoader {
         try (DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filePath))) {
             int id = dataInputStream.readInt();
             int nbImages = dataInputStream.readInt();
-            nbImages = 1000;
+            nbImages = 100;
             int nbLignes = dataInputStream.readInt();
             int nbColonnes = dataInputStream.readInt();
             Imagette[] images = new Imagette[nbImages];
@@ -43,9 +43,9 @@ public class MNISTLoader {
                     }
                 }
             }
-            for (Imagette image : images) {
+           /* for (Imagette image : images) {
                 image.setPixel(image.normalizeInput(image.pixels));
-            }
+            }*/
             return images;
         }
     }
