@@ -16,7 +16,7 @@ public class AlgoMLP extends AlgoClassification {
     @Override
     public int predireEtiquette(Imagette imagette) {
         double[] output = mlp.execute(imagette.getFlatPixels());
-        System.out.println("Sortie brute : " + Arrays.toString(output));
+        //System.out.println("Sortie brute : " + Arrays.toString(output));
         int maxIndex = 0;
         for (int i = 1; i < output.length; i++) {
             if (output[i] > output[maxIndex]) {
@@ -51,12 +51,12 @@ public class AlgoMLP extends AlgoClassification {
             iteration++;
 
             // Affichage de progression toutes les 10%
-            if (iteration % (max_iterations / 10) == 0) {
-                System.out.println("Apprentissage en cours : " + (iteration * 100 / max_iterations) + "%");
-            }
+//            if (iteration % (max_iterations / 10) == 0) {
+//                System.out.println("Apprentissage en cours : " + (iteration * 100 / max_iterations) + "%");
+//            }
         }
 
-        System.out.println("Apprentissage terminé après " + iteration + " itérations avec erreur finale : " + erreur_courante);
+        //System.out.println("Apprentissage terminé après " + iteration + " itérations avec erreur finale : " + erreur_courante);
         return erreur_courante;
     }
 }

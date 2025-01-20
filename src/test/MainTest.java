@@ -20,19 +20,23 @@ public class MainTest {
             System.out.println("Deuxième chargement de données");
             Donnees donneesTest = MNISTLoader.loadData("images/t10k-images.idx3-ubyte", "images/t10k-labels.idx1-ubyte");
 
-            // algos
-            kNN algo = new kNN(donneesTrain,2);
+            // KNN
+            kNN knn = new kNN(donneesTrain,2);
 
             // params MLP
             int[] layers = {784, 100, 50, 10};
             double tauxApprentissage = 0.01;
+
+            // fonctions d'activation de MLP
             TransferFunction fonctionActivation = new Sigmoid();
             TransferFunction fonctionActivation2 = new Hyperbolic();
 
-            MLP MLP = new MLP(donneesTrain, layers, tauxApprentissage, fonctionActivation2);
+            // MLP
+            MLP mlp = new MLP(donneesTrain, layers, tauxApprentissage, fonctionActivation);
 
             System.out.println("Calcul de la précision");
-            double Res = Statistique.calculerPrecision(MLP, donneesTest);
+//            double Res = Statistique.calculerPrecision(knn, donneesTest);
+            double Res = Statistique.calculerPrecision(mlp, donneesTest);
             System.out.println("Precision : " + Res*100 + "%");
         }
         catch (IOException e) {
