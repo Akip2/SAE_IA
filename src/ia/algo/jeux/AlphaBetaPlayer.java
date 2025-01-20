@@ -35,7 +35,7 @@ public class AlphaBetaPlayer extends Player {
 
     public ActionValuePair maxValeur(GameState state, double alpha, double beta) {
         incStateCounter();
-        if(state.isFinalState()){
+        if(game.endOfGame(state)){
             return new ActionValuePair(null, state.getGameValue());
         }
 
@@ -49,9 +49,9 @@ public class AlphaBetaPlayer extends Player {
 
             if(pair.getValue() >= maxValue) {
                 maxValue = pair.getValue();
-                maxAction = action;
 
                 if(maxValue > alpha) {
+                    maxAction = action;
                     alpha = maxValue;
                 }
             }
@@ -66,7 +66,7 @@ public class AlphaBetaPlayer extends Player {
 
     public ActionValuePair minValeur(GameState state, double alpha, double beta) {
         incStateCounter();
-        if(state.isFinalState()){
+        if(game.endOfGame(state)){
             return new ActionValuePair(null, state.getGameValue());
         }
 
@@ -80,9 +80,9 @@ public class AlphaBetaPlayer extends Player {
 
             if(pair.getValue() <= minValue){
                 minValue = pair.getValue();
-                minAction = action;
 
                 if(minValue < beta){
+                    minAction = action;
                     beta = minValue;
                 }
             }
