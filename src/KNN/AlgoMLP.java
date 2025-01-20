@@ -14,27 +14,49 @@ public class AlgoMLP extends AlgoClassification {
 
     @Override
     public int predireEtiquette(Imagette imagette) {
-        return (int) (mlp.execute(imagette.getFlatPixels())*10);
+        double[] output = mlp.execute(imagette.getFlatPixels());
+        int maxIndex = 0;
+        for (int i = 1; i < output.length; i++) {
+            if (output[i] > output[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
     }
 
     public double train(double erreur_cible, int max_iterations) {
-        double erreur_courante = 1;
+        double erreur_courante = Double.MAX_VALUE;
         int iteration = 0;
-        int count_percent = 1;
-        while ((erreur_courante > erreur_cible) && iteration < max_iterations) {
-//            if (iteration % (max_iterations/100) == 0) {
-//                System.out.println("Apprentissage en cours : " + count_percent +"%");
-//                count_percent++;
-//            }
+        int totalImagettes = donneesEntrainement.getNombreImagettes();
 
+        while ((erreur_courante > erreur_cible) && iteration < max_iterations) {
             erreur_courante = 0;
-            for (int indice = 0; indice < donneesEntrainement.getNombreImagettes(); indice++) {
-                double erreur = mlp.backPropagate(donneesEntrainement.getImagette(indice).getFlatPixels(), (double) donneesEntrainement.getImagette(indice).getLabel() /10);
+
+            for (int indice = 0; indice < totalImagettes; indice++) {
+                double[] labelOneHot = new double[mlp.getOutputLayerSize()];
+                int label = donneesEntrainement.getImagette(indice).getLabel(); // Returns an int
+
+
+                labelOneHot[label] = 1.0;
+
+                double erreur = mlp.backPropagate(
+                        donneesEntrainement.getImagette(indice).getFlatPixels(),
+                        labelOneHot
+                );
                 erreur_courante += erreur;
             }
-            erreur_courante /= donneesEntrainement.getNombreImagettes();
+
+            // Moyenne de l'erreur
+            erreur_courante /= totalImagettes;
             iteration++;
+
+            // Affichage de progression toutes les 10%
+            if (iteration % (max_iterations / 10) == 0) {
+                System.out.println("Apprentissage en cours : " + (iteration * 100 / max_iterations) + "%");
+            }
         }
+
+        System.out.println("Apprentissage terminé après " + iteration + " itérations avec erreur finale : " + erreur_courante);
         return erreur_courante;
     }
 }
