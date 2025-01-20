@@ -10,7 +10,6 @@ import ia.framework.jeux.Player;
 import java.util.ArrayList;
 
 public class MinMaxPlayer extends Player {
-    private int parkoured;
     /**
      * Represente un joueur
      *
@@ -26,7 +25,6 @@ public class MinMaxPlayer extends Player {
         Action move = null;
         ActionValuePair pair;
 
-        this.parkoured=0;
         if(player == PLAYER1){
             System.out.println("NUM 1");
             pair = maxValeur(state);
@@ -34,14 +32,13 @@ public class MinMaxPlayer extends Player {
         else {
             pair = minValeur(state);
         }
-        System.out.println(parkoured);
         move = pair.getAction();
 
         return move;
     }
 
     public ActionValuePair maxValeur(GameState state) {
-        parkoured++;
+        incStateCounter();
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
@@ -63,7 +60,7 @@ public class MinMaxPlayer extends Player {
     }
 
     public ActionValuePair minValeur(GameState state) {
-        parkoured++;
+        incStateCounter();
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }

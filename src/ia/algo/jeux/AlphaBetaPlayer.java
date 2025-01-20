@@ -9,7 +9,6 @@ import ia.framework.jeux.Player;
 import java.util.ArrayList;
 
 public class AlphaBetaPlayer extends Player {
-    private int parkoured=0;
     /**
      * Represente un joueur
      *
@@ -25,7 +24,6 @@ public class AlphaBetaPlayer extends Player {
         Action move = null;
         ActionValuePair pair;
 
-        this.parkoured = 0;
         if(player == PLAYER1){
             pair = maxValeur(state, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         }
@@ -33,14 +31,13 @@ public class AlphaBetaPlayer extends Player {
             pair = minValeur(state, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         }
 
-        System.out.println(parkoured);
         move = pair.getAction();
 
         return move;
     }
 
     public ActionValuePair maxValeur(GameState state, double alpha, double beta) {
-        parkoured++;
+        incStateCounter();
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
@@ -74,7 +71,7 @@ public class AlphaBetaPlayer extends Player {
     }
 
     public ActionValuePair minValeur(GameState state, double alpha, double beta) {
-        parkoured++;
+        incStateCounter();
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
