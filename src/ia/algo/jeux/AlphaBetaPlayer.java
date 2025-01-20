@@ -21,19 +21,16 @@ public class AlphaBetaPlayer extends Player {
 
     @Override
     public Action getMove(GameState state) {
-        Action move = null;
         ActionValuePair pair;
 
         if(player == PLAYER1){
-            pair = maxValeur(state, Double.MIN_VALUE, Double.MAX_VALUE);
+            pair = maxValeur(state, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         }
         else {
-            pair = minValeur(state, Double.MIN_VALUE, Double.MAX_VALUE);
+            pair = minValeur(state, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
         }
 
-        move = pair.getAction();
-
-        return move;
+        return pair.getAction();
     }
 
     public ActionValuePair maxValeur(GameState state, double alpha, double beta) {
@@ -42,7 +39,7 @@ public class AlphaBetaPlayer extends Player {
             return new ActionValuePair(null, state.getGameValue());
         }
 
-        double maxValue = Double.MIN_VALUE;
+        double maxValue = Double.NEGATIVE_INFINITY;
         Action maxAction = null;
 
         ArrayList<Action> actions = game.getActions(state);
@@ -72,8 +69,8 @@ public class AlphaBetaPlayer extends Player {
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
-        ;
-        double minValue = Double.MAX_VALUE;
+
+        double minValue = Double.POSITIVE_INFINITY;
         Action minAction = null;
 
         ArrayList<Action> actions = game.getActions(state);
