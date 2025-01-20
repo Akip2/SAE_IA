@@ -24,12 +24,12 @@ public class MainTest {
             kNN algo = new kNN(donneesTrain,2);
 
             // params MLP
-            int[] layers = {777, 300, 100, 50, 10};
+            int[] layers = {784, 100, 50, 10};
             double tauxApprentissage = 0.01;
             TransferFunction fonctionActivation = new Sigmoid();
             TransferFunction fonctionActivation2 = new Hyperbolic();
 
-            MLP MLP = new MLP(donneesTrain, layers, tauxApprentissage, fonctionActivation);
+            MLP MLP = new MLP(donneesTrain, layers, tauxApprentissage, fonctionActivation2);
 
             System.out.println("Calcul de la précision");
             double Res = Statistique.calculerPrecision(MLP, donneesTest);
