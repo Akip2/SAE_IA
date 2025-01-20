@@ -16,11 +16,11 @@ public class Main {
             Donnees donneesTrain = MNISTLoader.loadData("images/train-images.idx3-ubyte", "images/train-labels.idx1-ubyte");
 
             int[] layers = {784, 70, 20, 10};
-            double tauxApprentissage = 0.01;
+            double tauxApprentissage = 0.1;
             TransferFunction fonctionActivation = new Sigmoid();
             TransferFunction fonctionActivation2 = new Hyperbolic();
             double erreur_cible = 0.01;
-            int max_iterations = 10000;
+            int max_iterations = 1000;
 
             AlgoMLP algoMLP = new AlgoMLP(donneesTrain, layers, tauxApprentissage, fonctionActivation);
             algoMLP.mlp.setLearningRate(1);
@@ -28,8 +28,8 @@ public class Main {
 
             for (int i = 0; i < 10; i++) {
                 double erreur = algoMLP.train(erreur_cible, max_iterations);
-                //System.out.println("Itération " + i + " Erreur : "+erreur+" Précision : "+ Statistique.calculerPrecision(algoMLP, donneesTrain));
-                System.out.println("Itération " + i + " Erreur : "+erreur+ " Etiquettes : "+ donneesTrain.getImagette(0).getLabel() + " "+ donneesTrain.getImagette(1).getLabel() +" Prédiction : "+algoMLP.mlp.execute(donneesTrain.getImagette(0).getFlatPixels())+" "+algoMLP.mlp.execute(donneesTrain.getImagette(1).getFlatPixels()));
+                System.out.println("Itération " + i + " Erreur : "+erreur+" Précision : "+ Statistique.calculerPrecision(algoMLP, donneesTrain));
+                //System.out.println("Itération " + i + " Erreur : "+erreur+ " Etiquettes : "+ donneesTrain.getImagette(0).getLabel() + " "+ donneesTrain.getImagette(1).getLabel() +" Prédiction : "+ Arrays.toString(algoMLP.mlp.execute(donneesTrain.getImagette(0).getFlatPixels())) +" "+ Arrays.toString(algoMLP.mlp.execute(donneesTrain.getImagette(1).getFlatPixels())));
                 algoMLP.mlp.setLearningRate(Math.min(0.01, erreur));
             }
 
