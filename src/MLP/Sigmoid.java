@@ -9,6 +9,6 @@ public class Sigmoid implements TransferFunction {
 
     @Override
     public double evaluateDer(double value) {
-        return evaluate(value) - Math.pow(evaluate(value), 2);
+        return value - Math.pow(value, 2);
     }
 }
