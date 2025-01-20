@@ -22,16 +22,16 @@ public class MinMaxPlayer extends Player {
 
     @Override
     public Action getMove(GameState state) {
-        int player = state.getPlayerToMove();
-
         Action move = null;
         ActionValuePair pair;
 
         if(player == PLAYER1){
-            pair = minValeur(state);
+            System.out.println("NUM 1");
+            pair = maxValeur(state);
         }
         else {
-            pair = maxValeur(state);
+            System.out.println("NUM 2");
+            pair = minValeur(state);
         }
 
         move = pair.getAction();
@@ -48,10 +48,10 @@ public class MinMaxPlayer extends Player {
             ArrayList<Action> actions = game.getActions(state);
 
             for(Action action : actions){
-                State nextState = game.doAction(state, action);
-                ActionValuePair pair = minValeur((GameState) nextState);
+                GameState nextState = (GameState) game.doAction(state, action);
+                ActionValuePair pair = minValeur(nextState);
 
-                if(pair.getValue() > maxPair.getValue()){
+                if(pair.getValue() >= maxPair.getValue()){
                     maxPair = new ActionValuePair(action, pair.getValue());
                 }
             }
@@ -69,10 +69,10 @@ public class MinMaxPlayer extends Player {
             ArrayList<Action> actions = game.getActions(state);
 
             for(Action action : actions){
-                State nextState = game.doAction(state, action);
-                ActionValuePair pair = maxValeur((GameState) nextState);
+                GameState nextState = (GameState) game.doAction(state, action);
+                ActionValuePair pair = maxValeur(nextState);
 
-                if(pair.getValue() < minPair.getValue()){
+                if(pair.getValue() <= minPair.getValue()){
                     minPair = new ActionValuePair(action, pair.getValue());
                 }
             }

@@ -5,7 +5,7 @@ import MLP.TransferFunction;
 
 public class AlgoMLP extends AlgoClassification {
 
-    private MLP.MLPMNIST mlp;
+    public MLP.MLPMNIST mlp;
 
     public AlgoMLP(Donnees donneesEntrainement, int[] layers, double tauxApprentissage, TransferFunction fonctionActivation) {
         super(donneesEntrainement);
@@ -14,27 +14,27 @@ public class AlgoMLP extends AlgoClassification {
 
     @Override
     public int predireEtiquette(Imagette imagette) {
-        return mlp.execute(imagette.getFlatPixels());
+        return (int) (mlp.execute(imagette.getFlatPixels())*10);
     }
 
-    public void train(double erreur_cible, int max_iterations) {
+    public double train(double erreur_cible, int max_iterations) {
         double erreur_courante = 1;
         int iteration = 0;
         int count_percent = 1;
         while ((erreur_courante > erreur_cible) && iteration < max_iterations) {
-            
-            if (iteration % (max_iterations/100) == 0) {
-                System.out.println("Apprentissage en cours : " + count_percent +"%");
-                count_percent++;
-            }
+//            if (iteration % (max_iterations/100) == 0) {
+//                System.out.println("Apprentissage en cours : " + count_percent +"%");
+//                count_percent++;
+//            }
 
             erreur_courante = 0;
-            for (int i = 0; i < donneesEntrainement.getNombreImagettes(); i++) {
-                double erreur = mlp.backPropagate(donneesEntrainement.getImagette(i).getFlatPixels(), donneesEntrainement.getImagette(i).getLabel());
+            for (int indice = 0; indice < donneesEntrainement.getNombreImagettes(); indice++) {
+                double erreur = mlp.backPropagate(donneesEntrainement.getImagette(indice).getFlatPixels(), (double) donneesEntrainement.getImagette(indice).getLabel() /10);
                 erreur_courante += erreur;
             }
             erreur_courante /= donneesEntrainement.getNombreImagettes();
             iteration++;
         }
+        return erreur_courante;
     }
 }

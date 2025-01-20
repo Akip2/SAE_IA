@@ -1,5 +1,7 @@
 package KNN;
 
+import java.util.stream.Stream;
+
 public class Imagette {
     double[][] pixels;
     int etiquette;
@@ -38,17 +40,17 @@ public class Imagette {
         return this.pixels[0].length * this.pixels.length;
     }
 
-    public int[] getFlatPixels() {
-        int lineSize = this.pixels[0].length;
+        public double[] getFlatPixels() {
+            int lineSize = this.pixels[0].length;
 
-        int[] flatPixels = new int[this.pixels.length * lineSize];
+            double[] flatPixels = new double[this.pixels.length * lineSize];
 
-        for (int x = 0; x < this.pixels.length; x++) {
-            double[] line = this.pixels[x];
-            for (int y = 0; y < line.length; y++) {
-                flatPixels[x * lineSize + y] = (int) line[y];
+            for(int x=0; x<this.pixels.length; x++){
+                double[] line = this.pixels[x];
+                for(int y=0; y<line.length; y++){
+                    flatPixels[x*lineSize+y]=line[y];
+                }
             }
-        }
 
         return flatPixels;
     }
