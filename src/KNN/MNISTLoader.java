@@ -7,9 +7,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class MNISTLoader {
-    public static Donnees loadData(String imageFilePath, String labelFilePath) throws IOException {
+    public static Donnees loadData(String imageFilePath, String labelFilePath, Integer nbImages) throws IOException {
         // Charger les images
-        Imagette[] images = loadImages(imageFilePath);
+        Imagette[] images = loadImages(imageFilePath, nbImages);
 
         // Charger les étiquettes
         int[] labels = Etiquette.loadLabels(labelFilePath);
@@ -23,11 +23,13 @@ public class MNISTLoader {
         return new Donnees(images);
     }
 
-    public static Imagette[] loadImages(String filePath) throws IOException {
+    public static Imagette[] loadImages(String filePath, Integer nbImagesVoulues) throws IOException {
         try (DataInputStream dataInputStream = new DataInputStream(new FileInputStream(filePath))) {
             int id = dataInputStream.readInt();
             int nbImages = dataInputStream.readInt();
-            nbImages = 1000;
+            if (nbImagesVoulues != null) {
+                nbImages = nbImagesVoulues;
+            }
             int nbLignes = dataInputStream.readInt();
             int nbColonnes = dataInputStream.readInt();
             Imagette[] images = new Imagette[nbImages];
