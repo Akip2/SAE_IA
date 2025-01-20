@@ -41,31 +41,29 @@ public class AlphaBetaPlayer extends Player {
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
-        ActionValuePair maxPair = new ActionValuePair(null, Double.MIN_VALUE);
-        ArrayList<Action> actions = game.getActions(state);
 
         double maxValue = Double.MIN_VALUE;
+        Action maxAction = null;
+
+        ArrayList<Action> actions = game.getActions(state);
         for(Action action : actions){
             GameState nextState = (GameState) game.doAction(state, action);
             ActionValuePair pair = minValeur(nextState, alpha, beta);
 
-            double currentValue = pair.getValue();
-
-            if(currentValue >= maxValue) {
-                maxValue = currentValue;
-                maxPair = new ActionValuePair(action, maxValue);
+            if(pair.getValue() >= maxValue) {
+                maxValue = pair.getValue();
+                maxAction = action;
 
                 if(maxValue > alpha) {
                     alpha = maxValue;
                 }
             }
-
             if(maxValue >= beta) {
-                return maxPair;
+                return new ActionValuePair(maxAction, maxValue);
             }
         }
 
-        return maxPair;
+        return new ActionValuePair(maxAction, maxValue);
 
     }
 
@@ -74,30 +72,28 @@ public class AlphaBetaPlayer extends Player {
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
-        ActionValuePair minPair = new ActionValuePair(null, Double.MAX_VALUE);
-        ArrayList<Action> actions = game.getActions(state);
-
+        ;
         double minValue = Double.MAX_VALUE;
+        Action minAction = null;
+
+        ArrayList<Action> actions = game.getActions(state);
         for(Action action : actions){
             GameState nextState = (GameState) game.doAction(state, action);
             ActionValuePair pair = maxValeur(nextState, alpha, beta);
 
-            double currentValue = pair.getValue();
-
-            if(currentValue <= minValue){
-                minValue = currentValue;
-                minPair = new ActionValuePair(action, minValue);
+            if(pair.getValue() <= minValue){
+                minValue = pair.getValue();
+                minAction = action;
 
                 if(minValue < beta){
                     beta = minValue;
                 }
             }
-
             if(minValue <= alpha){
-                return minPair;
+                return new ActionValuePair(minAction, minValue);
             }
         }
-        return minPair;
+        return new ActionValuePair(minAction, minValue);
     }
 
 }
