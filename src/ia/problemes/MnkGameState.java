@@ -48,9 +48,127 @@ public class MnkGameState extends AbstractMnkGameState {
      * @return la valeur du jeux
      **/
     protected double evaluationFunction() {
-        return Double.NaN;
-    }
-    
+        int pos_x = this.possibleLines(X);
+        int pos_o = this.possibleLines(O);
 
-    
+        double value = pos_x-pos_o;
+
+        // System.out.println("Possibilities: X = "+pos_x+", O = "+pos_o+
+        //". Value = "+value);
+        return value;
+    }
+
+    // compte le nombre de lignes possibles pour player
+    private int possibleLines(int player){
+
+        return this.possibleVerticalLines(player) +
+                this.possibleHorizontalLines(player) +
+                this.possibleDiagonalLines(player) ;
+
+    }
+
+
+    // compte le nombre de lignes verticales possibles pour player
+    private int possibleVerticalLines(int player){
+
+        // une ligne possible pour player est un ligne :
+        // * vide
+        // * avec une seule pièce de player
+        // * avec deux pièces de player
+        // Si la ligne contient une pièce de l'adversaire
+        // elle n'est pas possible
+
+        int res = 0;
+        for(int c=0; c<this.cols; c++)
+            for(int r=0; r<=this.rows-this.streak; r++){
+                int counter = 0;
+                for(int k=0; k<this.streak; k++){
+                    if( this.getValueAt(r+k,c) == this.otherPlayer(player) ) {
+                        counter = 0;
+                        break; // plus besoin de continuer
+                    }
+                    else if( this.getValueAt(r+k,c) == player )
+                        counter ++;
+                    else // vide
+                        counter ++;
+                }
+                if( counter > 0 )
+                    res ++; // une ligne possible de plus
+            }
+
+        //System.out.println("Possible vertical for "+ (char) player+ " : "+res);
+        return res;
+    }
+
+    // compte le nombre de lignes horizontales possibles pour player
+    private int possibleHorizontalLines(int player){
+
+        // même raisonnement que pour les lignes verticales
+
+        int res = 0;
+        for(int r=0; r<this.rows;r++)
+            for(int c=0; c<=this.cols-this.streak; c++){
+                int counter = 0;
+                for(int k=0; k<this.streak; k++){
+                    if( this.getValueAt(r,c+k) == this.otherPlayer(player) ) {
+                        counter = 0;
+                        break; // plus besoin de continuer
+                    }
+                    else if( this.getValueAt(r,c+k) == player )
+                        counter ++;
+                    else // vide
+                        counter ++;
+                }
+                if( counter > 0 )
+                    res ++; // une ligne possible de plus
+            }
+        //System.out.println("Possible horizontal for "+ (char) player+ " : "+res);
+        return res;
+    }
+
+    // compte le nombre de lignes diagonales possibles pour player
+    private int possibleDiagonalLines(int player){
+
+        // même raisonnement que pour les lignes verticales
+
+        int res = 0;
+
+        // 45 deg
+        for(int c=0; c<=this.cols-this.streak; c++)
+            for(int r=0; r<=this.rows-this.streak; r++){
+                int counter = 0;
+                for(int k=0; k<this.streak; k++){
+                    if( this.getValueAt(r+k,c+k) == this.otherPlayer(player) ) {
+                        counter = 0;
+                        break; // plus besoin de continuer
+                    }
+                    else if( this.getValueAt(r+k,c+k) == player )
+                        counter ++;
+                    else // vide
+                        counter ++;
+                }
+                if( counter > 0 )
+                    res ++; // une ligne possible de plus
+            }
+
+        // -45 deg
+        for(int c=0; c<=this.cols-this.streak; c++)
+            for(int r=this.streak-1; r<this.rows; r++){
+                int counter = 0;
+                for(int k=0; k<this.streak; k++){
+                    if( this.getValueAt(r-k,c+k) == this.otherPlayer(player) ) {
+                        counter = 0;
+                        break; // plus besoin de continuer
+                    }
+                    else if( this.getValueAt(r-k,c+k) == player )
+                        counter ++;
+                    else // vide
+                        counter ++;
+                }
+                if( counter > 0 )
+                    res ++; // une ligne possible de plus
+            }
+        //System.out.println("Possible diagonal for "+ (char) player+ " : "+res);
+        return res;
+    }
 }
