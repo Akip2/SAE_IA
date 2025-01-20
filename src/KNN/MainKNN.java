@@ -6,8 +6,8 @@ import java.io.IOException;
 public class MainKNN {
     public static void main(String[] args) {
         try {
-            Donnees donneesTrain = MNISTLoader.loadData("images/train-images.idx3-ubyte", "images/train-labels.idx1-ubyte");
             System.out.println("Premier chargement de données");
+            Donnees donneesTrain = MNISTLoader.loadData("images/train-images.idx3-ubyte", "images/train-labels.idx1-ubyte");
             //System.out.println("Création de l'image");
             //MNISTLoader.sauverImage(images[images.length-1], "images/test2.png");
             System.out.println("Recherche des labels");
