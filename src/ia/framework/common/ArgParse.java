@@ -280,10 +280,10 @@ public class ArgParse {
         switch (algo) {
             case "rnd":
                 return new RandomTreeSearch(p, s);
-            //case "bfs":
-            //return new BFS(p,s);
-            // case "dfs":
-            //return new DFS(p,s);
+            case "bfs":
+                return new BFS(p,s);
+                case "dfs":
+            return new DFS(p,s);
             //case "ucs":
             //return new UCS(p,s);
             //case "gfs":
