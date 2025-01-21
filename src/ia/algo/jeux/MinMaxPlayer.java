@@ -42,7 +42,7 @@ public class MinMaxPlayer extends Player {
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
-        ActionValuePair maxPair = new ActionValuePair(null, Double.MIN_VALUE);
+        ActionValuePair maxPair = new ActionValuePair(null, Double.NEGATIVE_INFINITY);
         ArrayList<Action> actions = game.getActions(state);
 
         for(Action action : actions){
@@ -62,7 +62,7 @@ public class MinMaxPlayer extends Player {
         if(state.isFinalState()){
             return new ActionValuePair(null, state.getGameValue());
         }
-        ActionValuePair minPair = new ActionValuePair(null, Double.MAX_VALUE);
+        ActionValuePair minPair = new ActionValuePair(null, Double.POSITIVE_INFINITY);
         ArrayList<Action> actions = game.getActions(state);
 
         for(Action action : actions){

@@ -13,10 +13,10 @@ public class Main {
     public static void main(String[] args) {
         try {
             System.out.println("Chargement des données d'entraînements...");
-            Donnees donneesTrain = MNISTLoader.loadData("images/train-images.idx3-ubyte", "images/train-labels.idx1-ubyte");
+            Donnees donneesTrain = MNISTLoader.loadData("images/train-images.idx3-ubyte", "images/train-labels.idx1-ubyte", 1000);
 
             System.out.println("Chargement des données de tests...");
-            Donnees donneesTest = MNISTLoader.loadData("images/t10k-images.idx3-ubyte", "images/t10k-labels.idx1-ubyte");
+            Donnees donneesTest = MNISTLoader.loadData("images/t10k-images.idx3-ubyte", "images/t10k-labels.idx1-ubyte", null);
 
             int[] layers = {784, 100, 50, 10};
             double tauxApprentissage = 0.01;
@@ -27,7 +27,7 @@ public class Main {
             System.out.println("START : Précision train : "+Statistique.calculerPrecision(algoMLP, donneesTrain) + " ; Précision test : "+Statistique.calculerPrecision(algoMLP, donneesTest));
 
             double erreur_cible = 0.001;
-            int max_iterations = 500;
+            int max_iterations = 10;
             for (int i = 0; i < 10; i++) {
                 double erreur = algoMLP.train(erreur_cible, max_iterations);
                 System.out.println("Itération " + i + " Erreur : "+erreur+" Précision train : "+ Statistique.calculerPrecision(algoMLP, donneesTrain)+" ; Précision test : "+ Statistique.calculerPrecision(algoMLP, donneesTest));
