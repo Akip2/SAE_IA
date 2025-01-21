@@ -12,11 +12,16 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         try {
+            // MNIST
             System.out.println("Chargement des données d'entraînements...");
-            Donnees donneesTrain = MNISTLoader.loadData("images/train-images.idx3-ubyte", "images/train-labels.idx1-ubyte", 1000);
+            Donnees donneesTrain = MNISTLoader.loadData("images/MNIST/train-images.idx3-ubyte", "images/MNIST/train-labels.idx1-ubyte", 1000);
 
             System.out.println("Chargement des données de tests...");
-            Donnees donneesTest = MNISTLoader.loadData("images/t10k-images.idx3-ubyte", "images/t10k-labels.idx1-ubyte", null);
+            Donnees donneesTest = MNISTLoader.loadData("images/MNIST/t10k-images.idx3-ubyte", "images/MNIST/t10k-labels.idx1-ubyte", null);
+
+            // Fashion MNIST
+            Donnees donneesTrainFasion = MNISTLoader.loadData("images/Fashion_MNIST/train-images-idx3-ubyte", "images/Fashion_MNIST/train-labels-idx1-ubyte", null);
+            Donnees donneesTestFasion = MNISTLoader.loadData("images/Fashion_MNIST/t10k-images-idx3-ubyte", "images/Fashion_MNIST/t10k-labels-idx1-ubyte", null);
 
             int[] layers = {784, 100, 50, 10};
             double tauxApprentissage = 0.01;
