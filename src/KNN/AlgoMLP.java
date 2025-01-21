@@ -2,15 +2,15 @@ package KNN;
 
 import MLP.TransferFunction;
 
-import java.util.Arrays;
+import MLP.MLP;
 
 public class AlgoMLP extends AlgoClassification {
 
-    public MLP.MLP mlp;
+    public MLP mlp;
 
     public AlgoMLP(Donnees donneesEntrainement, int[] layers, double tauxApprentissage, TransferFunction fonctionActivation) {
         super(donneesEntrainement);
-        mlp = new MLP.MLP(layers, tauxApprentissage, fonctionActivation);
+        mlp = new MLP(layers, tauxApprentissage, fonctionActivation);
     }
 
     @Override
