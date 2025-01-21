@@ -20,6 +20,7 @@ public class AlphaBetaPlayer extends Player {
     public AlphaBetaPlayer(Game g, boolean player_one, int maxDepth) {
         super(g, player_one);
         this.maxDepth = maxDepth;
+        name="alphabeta";
     }
 
     @Override
