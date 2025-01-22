@@ -280,16 +280,16 @@ public class ArgParse {
         switch (algo) {
             case "rnd":
                 return new RandomTreeSearch(p, s);
-            //case "bfs":
-            //return new BFS(p,s);
-            // case "dfs":
-            //return new DFS(p,s);
-            //case "ucs":
-            //return new UCS(p,s);
-            //case "gfs":
-            //return new GFS(p,s);
-            //case "astar":
-            //return new AStar(p,s);
+            case "bfs":
+                return new BFS(p,s);
+                case "dfs":
+            return new DFS(p,s);
+            case "ucs":
+            return new UCS(p,s);
+            case "gfs":
+            return new GFS(p,s);
+            case "astar":
+            return new AStar(p,s);
             default:
                 System.out.println("Algorithme inconnu");
                 usage();

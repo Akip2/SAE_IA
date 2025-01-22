@@ -5,7 +5,6 @@ import ia.framework.common.ActionValuePair;
 import ia.framework.jeux.Game;
 import ia.framework.jeux.GameState;
 import ia.framework.jeux.Player;
-
 import java.util.ArrayList;
 
 public class AlphaBetaPlayer extends Player {
@@ -16,21 +15,21 @@ public class AlphaBetaPlayer extends Player {
      *
      * @param g          l'instance du jeux
      * @param player_one si joueur 1
+     * @param maxDepth   profondeur maximale pour l'algorithme
      */
     public AlphaBetaPlayer(Game g, boolean player_one, int maxDepth) {
         super(g, player_one);
         this.maxDepth = maxDepth;
-        name="alphabeta";
+        name = "alphabeta";
     }
 
     @Override
     public Action getMove(GameState state) {
         ActionValuePair pair;
 
-        if(player == PLAYER1){
+        if (player == PLAYER1) {
             pair = maxValeur(state, -Double.MAX_VALUE, Double.MAX_VALUE, 0);
-        }
-        else {
+        } else {
             pair = minValeur(state, -Double.MAX_VALUE, Double.MAX_VALUE, 0);
         }
 
@@ -39,74 +38,65 @@ public class AlphaBetaPlayer extends Player {
 
     public ActionValuePair maxValeur(GameState state, double alpha, double beta, int depth) {
         incStateCounter();
-        if(game.endOfGame(state)){
-            return new ActionValuePair(null, state.getGameValue());
-        }
 
-        if(depth >= maxDepth) {
+        if (game.endOfGame(state) || depth>=maxDepth) {
             return new ActionValuePair(null, state.getGameValue());
         }
 
         double maxValue = -Double.MAX_VALUE;
-        Action maxAction = null;
+        Action bestAction = null;
 
         ArrayList<Action> actions = game.getActions(state);
-        for(Action action : actions){
+        for (Action action : actions) {
             GameState nextState = (GameState) game.doAction(state, action);
-            ActionValuePair pair = minValeur(nextState, alpha, beta, depth+1);
+            ActionValuePair pair = minValeur(nextState, alpha, beta, depth + 1);
 
-            if(pair.getValue() >= maxValue) {
+            if (pair.getValue() > maxValue) {
                 maxValue = pair.getValue();
-
-                if(maxValue > alpha) {
-                    maxAction = action;
-                    alpha = maxValue;
-                }
+                bestAction = action;
             }
-            if(maxValue >= beta) {
-                return new ActionValuePair(maxAction, maxValue);
+
+            if (maxValue > alpha) {
+                alpha = maxValue;
+            }
+
+            if (maxValue >= beta) {
+                return new ActionValuePair(bestAction, maxValue);
             }
         }
 
-        return new ActionValuePair(maxAction, maxValue);
-
+        return new ActionValuePair(bestAction, maxValue);
     }
 
     public ActionValuePair minValeur(GameState state, double alpha, double beta, int depth) {
         incStateCounter();
 
-        if(game.endOfGame(state)){
+        if (game.endOfGame(state) || depth>=maxDepth) {
             return new ActionValuePair(null, state.getGameValue());
         }
 
-        if(depth >= maxDepth) {
-            return new ActionValuePair(null, this.evaluation(state));
-        }
-
         double minValue = Double.MAX_VALUE;
-        Action minAction = null;
+        Action bestAction = null;
 
         ArrayList<Action> actions = game.getActions(state);
-        for(Action action : actions){
+        for (Action action : actions) {
             GameState nextState = (GameState) game.doAction(state, action);
-            ActionValuePair pair = maxValeur(nextState, alpha, beta, depth+1);
+            ActionValuePair pair = maxValeur(nextState, alpha, beta, depth + 1);
 
-            if(pair.getValue() <= minValue){
+            if (pair.getValue() < minValue) {
                 minValue = pair.getValue();
-
-                if(minValue < beta){
-                    minAction = action;
-                    beta = minValue;
-                }
+                bestAction = action;
             }
-            if(minValue <= alpha){
-                return new ActionValuePair(minAction, minValue);
+
+            if (minValue < beta) {
+                beta = minValue;
+            }
+
+            if (minValue <= alpha) {
+                return new ActionValuePair(bestAction, minValue);
             }
         }
-        return new ActionValuePair(minAction, minValue);
-    }
 
-    private double evaluation(GameState state) {
-        return 0;
+        return new ActionValuePair(bestAction, minValue);
     }
 }
