@@ -250,7 +250,7 @@ public class ArgParse {
             case "human":
                 return new HumanPlayer(game, is_p1);
             case "minmax":
-                return new MinMaxPlayer(game, is_p1);
+                return new MinMaxPlayer(game, is_p1, getValueOfParam(args, "-d", (int) Double.POSITIVE_INFINITY));
             //getValueOfParam(args, "-d", -1));
             case "alphabeta":
                 return new AlphaBetaPlayer(game, is_p1, getValueOfParam(args, "-d", (int) Double.POSITIVE_INFINITY));
