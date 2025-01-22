@@ -284,8 +284,8 @@ public class ArgParse {
                 return new BFS(p,s);
                 case "dfs":
             return new DFS(p,s);
-            //case "ucs":
-            //return new UCS(p,s);
+            case "ucs":
+            return new UCS(p,s);
             //case "gfs":
             //return new GFS(p,s);
             //case "astar":
