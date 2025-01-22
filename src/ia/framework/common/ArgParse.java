@@ -288,8 +288,8 @@ public class ArgParse {
             return new UCS(p,s);
             case "gfs":
             return new GFS(p,s);
-            //case "astar":
-            //return new AStar(p,s);
+            case "astar":
+            return new AStar(p,s);
             default:
                 System.out.println("Algorithme inconnu");
                 usage();
