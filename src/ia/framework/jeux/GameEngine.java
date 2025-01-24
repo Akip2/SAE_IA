@@ -55,26 +55,26 @@ public class GameEngine {
      */
     public GameState gameLoop(){
 
-
         // Créer l'état de départ
         
         GameState state = game.init();
         
         // la boucle du jeu
-        while(true){
+        while (true) {
 
             // afficher le jeux 
-            System.out.println(state);
-            if(ArgParse.DEBUG) 
-                System.out.println("\tValeur pour joueur 1 : "+state.getGameValue());
-            
+            //Sytem.out.println(state);
+            if(ArgParse.DEBUG) {
+                //Sytem.out.println("\tValeur pour joueur 1 : "+state.getGameValue());
+            }
+
             // récupère le coup de J1
-            System.out.println("Au joueur 1 de jouer: ");
+            //Syt.out.println("Au joueur 1 de jouer: ");
             Action p1_move = player1.getMove( state );
             
             if(ArgParse.DEBUG){
-                System.out.println("\tChoisi : "+p1_move );
-                System.out.println(Misc.dupString("-", 80));
+                //Syt.out.println("\tChoisi : "+p1_move );
+                //Syt.out.println(Misc.dupString("-", 80));
             }
             
             // J1 joue
@@ -87,16 +87,17 @@ public class GameEngine {
             }
             
             // afficher le jeu
-            System.out.println(new_state);
-            if(ArgParse.DEBUG) 
-                System.out.println("\tValeur pour joueur 2 : "+new_state.getGameValue());
+            //Syt.out.println(new_state);
+            if(ArgParse.DEBUG) {
+                //Syt.out.println("\tValeur pour joueur 2 : "+new_state.getGameValue());
+            }
                         
             // récupère le coup du joueur 2 et le jouer
-            System.out.println("Au joueur 2 de jouer: ");
+            //Syt.out.println("Au joueur 2 de jouer: ");
             Action p2_move = player2.getMove( new_state );
             if(ArgParse.DEBUG){
-                System.out.println("\tChoisi : "+p2_move );
-                System.out.println(Misc.dupString("-", 80));
+                //Syt.out.println("\tChoisi : "+p2_move );
+                //Syt.out.println(Misc.dupString("-", 80));
             }
 
             // J2 joue 
@@ -111,8 +112,8 @@ public class GameEngine {
             total_moves++;
         }
         
-        System.out.println(state);
-        System.out.println("Fin de partie");
+        //Syt.out.println(state);
+        //Syt.out.println("Fin de partie");
         
         return state;
 

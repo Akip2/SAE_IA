@@ -14,7 +14,7 @@ public class MinMaxPlayer extends Player {
     /**
      * Represente un joueur
      *
-     * @param g          l'instance du jeux
+     * @param g          l'instance du jeu
      * @param player_one si joueur 1
      */
     public MinMaxPlayer(Game g, boolean player_one, int maxDepth) {
@@ -25,18 +25,7 @@ public class MinMaxPlayer extends Player {
 
     @Override
     public Action getMove(GameState state) {
-        Action move = null;
-        ActionValuePair pair;
-
-        if(player == PLAYER1){
-            pair = maxValeur(state, 0);
-        }
-        else {
-            pair = minValeur(state, 0);
-        }
-        move = pair.getAction();
-
-        return move;
+        return maxValeur(state, 0).getAction();
     }
 
     public ActionValuePair maxValeur(GameState state, int depth) {

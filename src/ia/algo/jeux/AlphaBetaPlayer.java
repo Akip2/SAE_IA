@@ -25,16 +25,9 @@ public class AlphaBetaPlayer extends Player {
 
     @Override
     public Action getMove(GameState state) {
-        ActionValuePair pair;
-
-        if (player == PLAYER1) {
-            pair = maxValeur(state, -Double.MAX_VALUE, Double.MAX_VALUE, 0);
-        } else {
-            pair = minValeur(state, -Double.MAX_VALUE, Double.MAX_VALUE, 0);
-        }
-
-        return pair.getAction();
+        return maxValeur(state, -Double.MAX_VALUE, Double.MAX_VALUE, 0).getAction();
     }
+
 
     public ActionValuePair maxValeur(GameState state, double alpha, double beta, int depth) {
         incStateCounter();
