@@ -43,7 +43,7 @@ public class LancerJeux {
         int victoiresMinMax = 0;
         int totalNoeudsExploresAlphaBeta = 0;
         int totalNoeudsExploresMinMax = 0;
-        int nbParties = 100;
+        int nbParties = 1;
 
         for (int i = 0; i < nbParties; i++) {
 
@@ -81,30 +81,32 @@ public class LancerJeux {
 //            System.out.println("Le Joueur 2 a exploré "+ p2.getStateCounter() +" états");
 
 
+            //Ajout du nombre de noeuds explorés
+            if (i % 2 == 0) {
+                totalNoeudsExploresAlphaBeta += p1.getStateCounter();
+                totalNoeudsExploresMinMax += p2.getStateCounter();
+            }
+            else{
+                totalNoeudsExploresAlphaBeta += p2.getStateCounter();
+                totalNoeudsExploresMinMax += p1.getStateCounter();
+            }
+
             if (game_engine.getEndGameValue(end_game) == GameState.P1_WIN) {
                 //System.exit(101);
                 if (i % 2 == 0) {
                     victoiresAlphaBeta++;
-                    totalNoeudsExploresAlphaBeta += p1.getStateCounter();
-                    totalNoeudsExploresMinMax += p2.getStateCounter();
                 }
                 else{
                     victoiresMinMax++;
-                    totalNoeudsExploresAlphaBeta += p2.getStateCounter();
-                    totalNoeudsExploresMinMax += p1.getStateCounter();
                 }
             }
-            if (game_engine.getEndGameValue(end_game) == GameState.P2_WIN) {
+            else if (game_engine.getEndGameValue(end_game) == GameState.P2_WIN) {
                 //System.exit(102);
                 if (i % 2 == 0) {
                     victoiresMinMax++;
-                    totalNoeudsExploresAlphaBeta += p1.getStateCounter();
-                    totalNoeudsExploresMinMax += p2.getStateCounter();
                 }
                 else {
                     victoiresAlphaBeta++;
-                    totalNoeudsExploresAlphaBeta += p2.getStateCounter();
-                    totalNoeudsExploresMinMax += p1.getStateCounter();
                 }
             }
 //            if (game_engine.getEndGameValue(end_game) == GameState.DRAW)
