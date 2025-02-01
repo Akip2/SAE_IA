@@ -43,7 +43,7 @@ public class LancerJeux {
         int victoiresMinMax = 0;
         int totalNoeudsExploresAlphaBeta = 0;
         int totalNoeudsExploresMinMax = 0;
-        int nbParties = 100;
+        int nbParties = 1;
 
         for (int i = 0; i < nbParties; i++) {
 

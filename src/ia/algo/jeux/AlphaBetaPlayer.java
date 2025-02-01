@@ -25,7 +25,12 @@ public class AlphaBetaPlayer extends Player {
 
     @Override
     public Action getMove(GameState state) {
-        return maxValeur(state, -Double.MAX_VALUE, Double.MAX_VALUE, 0).getAction();
+        if(player==PLAYER1) {
+            return maxValeur(state, -Double.MAX_VALUE, Double.MAX_VALUE, 0).getAction();
+        }
+        else {
+            return minValeur(state, -Double.MAX_VALUE, Double.MAX_VALUE, 0).getAction();
+        }
     }
 
 

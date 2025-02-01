@@ -25,7 +25,12 @@ public class MinMaxPlayer extends Player {
 
     @Override
     public Action getMove(GameState state) {
-        return maxValeur(state, 0).getAction();
+        if(player == PLAYER1){
+            return maxValeur(state, 0).getAction();
+        }
+        else {
+            return minValeur(state, 0).getAction();
+        }
     }
 
     public ActionValuePair maxValeur(GameState state, int depth) {
