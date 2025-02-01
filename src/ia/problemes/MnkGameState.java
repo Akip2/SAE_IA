@@ -58,6 +58,29 @@ public class MnkGameState extends AbstractMnkGameState {
         return value;
     }
 
+    /**
+     * Une fonction d'évaluation basée sur la stratégie de blocage de l'adversaire.
+     * Le joueur actif cherche à maximiser ses opportunités tout en bloquant celles
+     * de l'adversaire.
+     *
+     * @return la valeur de l'état de jeu
+     */
+//    @Override
+//    protected double evaluationFunction() {
+//        int playerActive = this.player_to_move; // Le joueur actif (X ou O)
+//        int opponent = this.otherPlayer(playerActive); // L'adversaire
+//
+//        // Nombre de lignes, colonnes et diagonales possibles pour chaque joueur
+//        int playerPotentialLines = possibleLines(playerActive);
+//        int opponentPotentialLines = possibleLines(opponent);
+//
+//        // Évaluation basée sur le différentiel
+//        double value = playerPotentialLines - 2 * opponentPotentialLines;
+//
+//        return value;
+//    }
+
+
     // compte le nombre de lignes possibles pour player
     private int possibleLines(int player){
 
